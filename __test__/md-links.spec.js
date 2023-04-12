@@ -1,23 +1,3 @@
-/*const mdLinks = require('../index');
-//const pathModule = require("path");
-//const fs = require("fs");
-//const https = require("https");
-//const  {absolutePathRoute , existPath} = require("./function");
-
-
-describe('mdLinks', () => {
-
-  it('should...', () => {
-    console.log('FIX ME!');
-  });
-  it('deberia devolver una promesa', () =>{
-    expect(mdLinks()).toBe(typeof Promise );
-  });
-
-});
-//console.log
-*/
-
 const assert = require('assert');
 const pathModule = require('path');
 const fs = require('fs');
@@ -50,3 +30,18 @@ describe('Testing existPath function', () => {
     assert.strictEqual(result, false);
   });
 });
+
+
+/*
+describe('mdLinks', () => {
+
+  it('should...', () => {
+    console.log('FIX ME!');
+  });
+  it('deberia devolver una promesa', () =>{
+    expect(mdLinks()).toBe(typeof Promise );
+  });
+
+});
+//console.log
+*/
