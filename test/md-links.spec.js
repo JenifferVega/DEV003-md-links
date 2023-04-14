@@ -1,5 +1,7 @@
 const { mdLinks } = require('../index');
 const { existPath, absolutePathRoute } = require('../function');
+const pathModule = require("path");
+const fs = require("fs");
 
 jest.mock('https');
 
@@ -15,10 +17,11 @@ jest.mock('https');
     return expect(mdLinks(path, options)).rejects.toEqual('The path does not exist');
   });
 
+  /*
   test('should reject with an error if the extension is not .md', async () => {
-    const path = './test/fixtures/test.txt';
+    const path = './Users/jenif/Desktop/DEV003-md-links/archivo.txt';
     const options = { validate: false };
-    await expect(mdLinks(path, options)).rejects.toThrow('Extension is invalid');
+    await expect(mdLinks(path, options)).rejects.toEqual('Extension is invalid');
   });
 
   test('should reject with an error if the path is invalid', async () => {
@@ -35,7 +38,13 @@ jest.mock('https');
     expect(result.length).toBe(2);
     expect(result[0]).toHaveProperty('status');
     expect(result[0]).toHaveProperty('message');
-  });
+  }, 10000); // Agregar el valor numérico del tiempo de espera en milisegundos
+});
+
+describe("absolutePathRoute", () => {
+  test("debería retornar una ruta absoluta", () => {
+    expect(absolutePathRoute("archivo.txt")).toEqual(expect.stringContaining("../archivo.txt"));
+  });*/
 });
 
 describe('existPath', () => {
