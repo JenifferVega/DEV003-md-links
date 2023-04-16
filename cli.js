@@ -26,6 +26,7 @@ const args = process.argv.slice(2);//obtendo los argumentos que pasan en la line
 //console.log("args", args);
 const { mdLinks } = require("./index.js");
 const path = args[0]; //´primer argumento de  la variable path
+console.log(path, "path")
 const action = args[1] || "";// guarda el segundo argumento y si no hay segundo argumento guardo una cadena vacia en su lugar
 const action2 = args[2] || "";// guarda 3er argumento
 

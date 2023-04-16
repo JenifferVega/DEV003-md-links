@@ -14,7 +14,7 @@ const mdLinks = (path, options) => {
     // Convertir la ruta relativa en una ruta absoluta
     const absolutePath = absolutePathRoute(path);
 
-    // Validar si la ruta existe
+    // Validar si la ruta existe//
     if (!existPath(absolutePath)) {
       reject("The path does not exist");
       return;
