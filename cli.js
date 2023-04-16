@@ -23,7 +23,7 @@ console.log(
 );
 
 const args = process.argv.slice(2);//obtendo los argumentos que pasan en la linea de comandos y el slice elimina los 2 primeros argumentos que no son relevantes
-console.log("args", args);
+//console.log("args", args);
 const { mdLinks } = require("./index.js");
 const path = args[0]; //´primer argumento de  la variable path
 const action = args[1] || "";// guarda el segundo argumento y si no hay segundo argumento guardo una cadena vacia en su lugar
@@ -35,7 +35,7 @@ mdLinks(path, { validate: action === "--v" || action2 === "--v" })// llamo a la 
   .then((links) => {// encadeno con el metodo then para manejar el resultado de la promesa devuelta por mdlinks
     //console.log(links);
     const totalAction = action + action2; //concateno el valor action y action en una sola variable
-    console.log("totalAction", totalAction)
+    //console.log("totalAction", totalAction)
 
     if (totalAction?.includes("--help")) {// linea de comandos
       console.log("Los siguientes comandos están disponibles:");
