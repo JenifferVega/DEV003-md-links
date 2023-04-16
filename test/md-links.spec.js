@@ -18,6 +18,34 @@ jest.mock('https');
   });
 });
 
+it('debería resolver una promesa con una matriz de objetos de enlace', () => {
+  const archivoConEnlacesValidos = './files/demo.md';
+  return mdLinks(archivoConEnlacesValidos).then((links) => {
+    expect(Array.isArray(links)).toBe(true);
+    expect(links.length).toBeGreaterThan(0);
+    links.forEach((link) => {
+      expect(link).toHaveProperty('href');
+      expect(link).toHaveProperty('text');
+      expect(link).toHaveProperty('file');
+    });
+  });
+});
+
+it('debería resolver una promesa con una matriz de objetos de enlace que contienen información de estado y mensaje si la opción validate es verdadera', () => {
+  const archivoConEnlacesValidos = './files/demo.md';
+  return mdLinks(archivoConEnlacesValidos, { validate: true }).then((links) => {
+    expect(Array.isArray(links)).toBe(true);
+    expect(links.length).toBeGreaterThan(0);
+    links.forEach((link) => {
+      expect(link).toHaveProperty('href');
+      expect(link).toHaveProperty('text');
+      expect(link).toHaveProperty('file');
+      expect(link).toHaveProperty('status');
+      expect(link).toHaveProperty('message');
+    });
+  });
+});
+
 describe('existPath', () => {
   test('should return true if the path exists', () => {
     const path = './files/demo.md';
