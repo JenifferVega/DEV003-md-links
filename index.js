@@ -8,6 +8,7 @@ const {
 } = require("./function");
 
 const mdLinks = (path, options) => {
+
   return new Promise((resolve, reject) => {
     // Convertir la ruta relativa en una ruta absoluta
     const absolutePath = absolutePathRoute(path);
