@@ -34,7 +34,7 @@ const options = yargs
     (argv) => {
       mdLinks(argv.path, argv)
         .then((links) => {
-          console.log("links",links);
+          //console.log("links",links);
           const { validate, stats } = argv;
           if (validate && stats) {
             const totalLinks = links.length;

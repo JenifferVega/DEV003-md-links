@@ -26,7 +26,7 @@ const mdLinks = (path, options) => {
         links.forEach((link) => {
           validateLink(link)
             .then((result) => {
-              console.log("result",links.filter((link) => link.status !== null).length, numMatches);
+             // console.log("result",links.filter((link) => link.status !== null).length, numMatches);
               if (options && options.validate) {
                 link.status = result.status;
                 link.message = result.message;
@@ -39,7 +39,7 @@ const mdLinks = (path, options) => {
               }
             })
             .catch((error) => {
-              console.log("error",error)
+             // console.log("error",error)
               if (options && options.validate) {
                 link.status = error.status;
                 link.message = error.message;
