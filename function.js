@@ -13,6 +13,7 @@ const validExtension = (parsed) => {
   return false;
 };
 
+
 const readFilePromise = (absolutePath) => {
   return new Promise((resolve, reject) => {
     fs.readFile(absolutePath, (error, data) => {
@@ -24,6 +25,7 @@ const readFilePromise = (absolutePath) => {
     });
   });
 };
+
 
 
 const validateLink = (link) => {
@@ -48,10 +50,13 @@ const validateLink = (link) => {
   });
 };
 
+
+
 module.exports = {
   absolutePathRoute,
   existPath,
   readFilePromise,
   validExtension,
   validateLink,
+  extractLinks,
 };

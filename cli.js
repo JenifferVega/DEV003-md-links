@@ -1,6 +1,7 @@
 const { mdLinks } = require("./index.js");
 const chalk = require("chalk");
 const yargs = require("yargs");
+//console.log("yargs", yargs)
 
 const message = "Bienvenido a la herramienta MD-Links!";
 const maxLength = process.stdout.columns;
@@ -31,17 +32,18 @@ const options = yargs
       });
     },
     (argv) => {
+      //console.log("argv", argv)
       mdLinks(argv.path, argv)
         .then((links) => {
           const { validate, stats } = argv;
           if (validate && stats) {
             const totalLinks = links.length;
             const uniqueLinks = new Set(links.map((link) => link.href)).size;
-            const brokenLinks = links.filter((link) => link.status !== 200).length;
+            const brokenLinks = links.filter((link) => link.status >= 400 ).length;
             console.log(`Total: ${totalLinks}\nUnique: ${uniqueLinks}\nBroken: ${brokenLinks}`);
           } else if (validate) {
             links.forEach((link) => {
-              if (link.status === 200) {
+              if (link.status < 400) {
                 console.log(`href: ${link.href}\ntext: ${link.text}\nfile: ${link.file}\nstatus: ${link.status}\nmessage: ${link.message}\n`);
               } else {
                 console.log(`href: ${link.href}\ntext: ${link.text}\nfile: ${link.file}\nstatus: ${link.status}\nmessage: ${link.message}\n`);

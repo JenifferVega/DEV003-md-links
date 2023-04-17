@@ -15,26 +15,35 @@ const relativePath = "./files/demo.md";
 // Ruta absoluta para pruebas
 const absolutePath = pathModule.resolve(__dirname, `.${relativePath}`);
 
-// Caso de prueba 1: Comprobar si la ruta relativa se convierte en una ruta absoluta
+describe("mdLinks function", () => {
+  test("should export a function", () => {
+    expect(typeof mdLinks).toBe("function");
+  });
+  test("should return a Promise", () => {
+    expect(mdLinks("./files/demo.md")).toBeInstanceOf(Promise);
+  });
+
+
+// Comprobar si la ruta relativa se convierte en una ruta absoluta
 test("Convert relative path to absolute path", () => {
   const result = absolutePathRoute(relativePath);
   expect(result).toBe(absolutePath);
 });
 
-// Caso de prueba 2: Comprobar si la ruta existe
+//  Comprobar si la ruta existe
 test("Check if path exists", () => {
   const result = existPath(absolutePath);
   expect(result).toBe(true);
 });
 
-// Caso de prueba 3: Validar la extensión del archivo
+//  Validar la extensión del archivo
 test("Validate file extension", () => {
   const parsed = pathModule.parse(absolutePath);
   const result = validExtension(parsed);
   expect(result).toBe(true);
 });
 
-// Caso de prueba 4: Leer el archivo y devolver su contenido
+//  Leer el archivo y devolver su contenido
 test("Read file and return content", (done) => {
   readFilePromise(absolutePath)
     .then((data) => {
@@ -46,7 +55,7 @@ test("Read file and return content", (done) => {
     });
 });
 
-// Caso de prueba 5: Validar enlace
+//  Validar enlace
 test("Validate link", (done) => {
   const link = {
     href: "https://www.example.com",
@@ -66,7 +75,7 @@ test("Validate link", (done) => {
     });
 }, 5000);
 
-// Caso de prueba 6: Probar la función mdLinks
+// Probar la función mdLinks
 test("mdLinks function test", (done) => {
   const options = { validate: true };
   mdLinks(relativePath, options)
@@ -77,4 +86,5 @@ test("mdLinks function test", (done) => {
     .catch((error) => {
       done(error);
     });
+});
 });
