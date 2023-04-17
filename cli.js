@@ -32,9 +32,9 @@ const options = yargs
       });
     },
     (argv) => {
-      //console.log("argv", argv)
       mdLinks(argv.path, argv)
         .then((links) => {
+          console.log("links",links);
           const { validate, stats } = argv;
           if (validate && stats) {
             const totalLinks = links.length;
@@ -43,7 +43,7 @@ const options = yargs
             console.log(`Total: ${totalLinks}\nUnique: ${uniqueLinks}\nBroken: ${brokenLinks}`);
           } else if (validate) {
             links.forEach((link) => {
-              if (link.status < 400) {
+              if (link.status < 200) {
                 console.log(`href: ${link.href}\ntext: ${link.text}\nfile: ${link.file}\nstatus: ${link.status}\nmessage: ${link.message}\n`);
               } else {
                 console.log(`href: ${link.href}\ntext: ${link.text}\nfile: ${link.file}\nstatus: ${link.status}\nmessage: ${link.message}\n`);
@@ -60,7 +60,7 @@ const options = yargs
           }
         })
         .catch((error) => {
-          console.log(error.message);
+          console.log("error: ",error.message);
         });
     }
   )

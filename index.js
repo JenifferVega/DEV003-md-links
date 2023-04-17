@@ -7,17 +7,17 @@ const {
   validExtension,
   readFilePromise,
   validateLink,
-  extractLinks
+  extractLinks,
 } = require("./function");
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
+
     const absolutePath = absolutePathRoute(path);
     if (!existPath(absolutePath)) {
       reject("The path does not exist");
       return;
     }
-
     const parsed = pathModule.parse(absolutePath);
     if (validExtension(parsed)) {
       readFilePromise(absolutePath).then((data) => {
@@ -26,25 +26,33 @@ const mdLinks = (path, options) => {
         links.forEach((link) => {
           validateLink(link)
             .then((result) => {
+              console.log("result",links.filter((link) => link.status !== null).length, numMatches);
               if (options && options.validate) {
                 link.status = result.status;
                 link.message = result.message;
               }
-              if (links.filter((link) => link.status !== null).length === numMatches) {
+              if (
+                links.filter((link) => link.status !== null).length ===
+                numMatches
+              ) {
                 resolve(links);
               }
             })
             .catch((error) => {
+              console.log("error",error)
               if (options && options.validate) {
                 link.status = error.status;
                 link.message = error.message;
               }
-              if (links.filter((link) => link.status !== null).length === numMatches) {
+              if (
+                links.filter((link) => link.status !== null).length ===
+                numMatches
+              ) {
                 resolve(links);
               }
             });
         });
-      });
+      }).catch(error => reject(error));
     } else {
       reject(new Error("Extension is invalid"));
     }
