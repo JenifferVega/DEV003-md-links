@@ -1,10 +1,15 @@
 const { mdLinks } = require("../index");
+const fs = require("fs");
+//sconst { expect } = require('chai');
+//expect(actual).to.deep.equal(expected);
+
 const {
   absolutePathRoute,
   existPath,
   validExtension,
   readFilePromise,
   validateLink,
+  extractLinks,
 } = require("../function");
 
 const pathModule = require("path");
@@ -87,4 +92,18 @@ test("mdLinks function test", (done) => {
       done(error);
     });
 });
+});
+
+describe('extractLinks', () => {
+  it('should extract links from a file', () => {
+    const filePath = './files/demo.md'
+    const data = fs.readFileSync(filePath);
+    const expectedLinks = [
+      { href: 'https://www.google.com/', text: 'Google', file: filePath, status: null, message: null },
+      { href: 'https://en.wikipedia.org/wiki/Main_Page', text: 'Wikipedia', file: filePath, status: null, message: null },
+      { href: 'https://soyunarutaprueba2342/', text: 'GitHub', file: filePath, status: null, message: null },
+    ];
+    const actualLinks = extractLinks(data, filePath);
+    expect(actualLinks).toEqual(expectedLinks);
+  });
 });
